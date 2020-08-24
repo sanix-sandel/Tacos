@@ -4,9 +4,9 @@ import com.Tacos.Tacos.Taco;
 import com.Tacos.Tacos.models.Ingredient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,11 +50,11 @@ public class DesignTacoController {
                 .collect(Collectors.toList());
     }
 
-   /* @PostMapping
-    public String processDesign(Design design){
+    @PostMapping
+    public String processDesign(@ModelAttribute("design") Taco design){
 
 
-        log.info("Process design: "+design);
+        //log.info("Process design: "+design);
         return "redirect:/orders/current";
-    }*/
+    }
 }
