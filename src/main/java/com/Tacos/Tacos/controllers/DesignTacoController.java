@@ -2,15 +2,13 @@ package com.Tacos.Tacos.controllers;
 
 import com.Tacos.Tacos.Taco;
 import com.Tacos.Tacos.data.IngredientRepository;
+import com.Tacos.Tacos.data.TacoRepository;
 import com.Tacos.Tacos.models.Ingredient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -21,12 +19,17 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("order")
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
-    public DesignTacoController(IngredientRepository ingredientRepo) {
+    private TacoRepository designRepo;
+
+    public DesignTacoController(IngredientRepository ingredientRepo,
+                                TacoRepository designRepo) {
         this.ingredientRepo = ingredientRepo;
+        this.designRepo=designRepo;
     }
 
     @GetMapping
