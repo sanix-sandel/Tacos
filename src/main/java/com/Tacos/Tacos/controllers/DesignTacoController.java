@@ -37,18 +37,24 @@ public class DesignTacoController {
          Ingredient.Type[] types=Ingredient.Type.values();
          for(Ingredient.Type type:types){
             model.addAttribute(type.toString().toLowerCase(),
-                filterByType(ingredients, type));
+                    filterByType(ingredients, type));
          }
 
          model.addAttribute("design", new Taco());
          return "design";
     }
 
-    @PostMapping
+    private List<Ingredient> filterByType(List<Ingredient>ingredients, Ingredient.Type type){
+        return ingredients.stream()
+                .filter(x->x.getType().equals(type))
+                .collect(Collectors.toList());
+    }
+
+   /* @PostMapping
     public String processDesign(Design design){
 
 
         log.info("Process design: "+design);
         return "redirect:/orders/current";
-    }
+    }*/
 }
