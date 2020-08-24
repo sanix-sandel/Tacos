@@ -1,10 +1,12 @@
 package com.Tacos.Tacos.controllers;
 
+import com.Tacos.Tacos.Order;
 import com.Tacos.Tacos.Taco;
 import com.Tacos.Tacos.data.IngredientRepository;
 import com.Tacos.Tacos.data.TacoRepository;
 import com.Tacos.Tacos.models.Ingredient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -25,6 +27,17 @@ public class DesignTacoController {
     private final IngredientRepository ingredientRepo;
 
     private TacoRepository designRepo;
+
+    @ModelAttribute(name="order")
+    public Order order(){
+        return new Order();
+    }
+
+    @ModelAttribute(name="taco")
+    public Taco taco(){
+        return new Taco();
+    }
+
 
     public DesignTacoController(IngredientRepository ingredientRepo,
                                 TacoRepository designRepo) {
@@ -53,12 +66,17 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("design") Taco design, Errors errors){
+    public String processDesign(@Valid Taco design,
+                                Errors errors,
+                                @ModelAttribute Order order){
 
         if(errors.hasErrors()){
             return "design";
         }
         //log.info("Process design: "+design);
+        Taco saved=designRepo.save(design);
+        order.addDesign(saved);
+
         return "redirect:/orders/current";
     }
 }
