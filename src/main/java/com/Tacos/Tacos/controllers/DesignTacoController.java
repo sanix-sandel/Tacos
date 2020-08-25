@@ -28,6 +28,12 @@ public class DesignTacoController {
 
     private TacoRepository designRepo;
 
+    public DesignTacoController(IngredientRepository ingredientRepo,
+                                TacoRepository designRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.designRepo=designRepo;
+    }
+
     @ModelAttribute(name="order")
     public Order order(){
         return new Order();
@@ -36,13 +42,6 @@ public class DesignTacoController {
     @ModelAttribute(name="taco")
     public Taco taco(){
         return new Taco();
-    }
-
-
-    public DesignTacoController(IngredientRepository ingredientRepo,
-                                TacoRepository designRepo) {
-        this.ingredientRepo = ingredientRepo;
-        this.designRepo=designRepo;
     }
 
     @GetMapping
