@@ -1,24 +1,40 @@
 package com.Tacos.Tacos.models;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Data
-@RequiredArgsConstructor
+@Entity
 public class Ingredient {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
 
-    private final String id;
-    private final String name;
-    private final Type type;
+    private String name;
+    private Type type;
 
-    public static enum Type{
-        WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+    public String getId() {
+        return id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }
 

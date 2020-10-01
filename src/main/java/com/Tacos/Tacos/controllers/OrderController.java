@@ -1,12 +1,11 @@
 package com.Tacos.Tacos.controllers;
 
-import com.Tacos.Tacos.Order;
+import com.Tacos.Tacos.models.Order;
 //import com.sun.java.util.jar.pack.Utils;
 import com.Tacos.Tacos.data.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +20,10 @@ import javax.validation.Valid;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderRepository orderRepo;
+    private OrderRepository orderRepository;
 
-    public OrderController(OrderRepository orderRepo) {
-        this.orderRepo = orderRepo;
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @GetMapping("/current")
@@ -40,7 +39,7 @@ public class OrderController {
             return "orderForm";
         }
 
-        orderRepo.save(order);
+        orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/";
     }

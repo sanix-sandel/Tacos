@@ -1,12 +1,11 @@
 package com.Tacos.Tacos.data;
 
 import com.Tacos.Tacos.models.Ingredient;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface IngredientRepository {
 
-    Iterable <Ingredient> findAll();
+@Repository
+public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-    Ingredient findById(String id);
-
-    Ingredient save(Ingredient ingredient);
 }

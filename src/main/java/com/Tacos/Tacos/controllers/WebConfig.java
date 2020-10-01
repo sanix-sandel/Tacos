@@ -11,3 +11,4 @@ public class WebConfig  implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
     }
 }
+//hen a controller is simple enough that it doesn’t populate a model or process input
