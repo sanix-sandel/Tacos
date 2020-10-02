@@ -1,22 +1,21 @@
 package com.Tacos.Tacos.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     private String name;
+
+   @Enumerated(value=EnumType.STRING)
     private Type type;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

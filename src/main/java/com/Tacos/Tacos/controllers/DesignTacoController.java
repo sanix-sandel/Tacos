@@ -41,14 +41,15 @@ public class DesignTacoController {
 
          Type[] types=Type.values();
          for(Type type:types){
-            model.addAttribute(type.toString().toLowerCase(), ingredientService.filterByType(ingredients, type));
+            model.addAttribute(type.toString().toLowerCase(),
+                    ingredientService.filterByType(ingredients, type));
          }
 
          return "design";
     }
 
 
-    @PostMapping
+    /*@PostMapping
     public String processDesign(@Valid Taco taco,
                                 Errors errors,
                                 @ModelAttribute Order order){
@@ -61,5 +62,5 @@ public class DesignTacoController {
         order.addDesign(saved);
 
         return "redirect:/orders/current";
-    }
+    }*/
 }
