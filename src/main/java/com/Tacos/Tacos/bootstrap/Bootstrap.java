@@ -1,7 +1,9 @@
 package com.Tacos.Tacos.bootstrap;
 
 import com.Tacos.Tacos.data.IngredientRepository;
+import com.Tacos.Tacos.data.TacoRepository;
 import com.Tacos.Tacos.models.Ingredient;
+import com.Tacos.Tacos.models.Taco;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,14 +17,19 @@ import static com.Tacos.Tacos.models.Type.*;
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final IngredientRepository ingredientRepository;
+    private final TacoRepository tacoRepository;
 
-    public Bootstrap(IngredientRepository ingredientRepository) {
+    public Bootstrap(IngredientRepository ingredientRepository,
+    TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository=tacoRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
         ingredientRepository.saveAll(getIngredients());
+        tacoRepository.saveAll(getTacos());
+
     }
 
     private List<Ingredient> getIngredients(){
@@ -80,5 +87,21 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 
         return ingredients;
+    }
+
+    private List<Taco> getTacos(){
+
+
+        List<Taco> tacos=new ArrayList<>();
+
+        Taco taco1=new Taco("Pizza");
+        taco1.getIngredients().addAll(getIngredients().subList(0,4));
+
+        Taco taco2=new Taco("Hamburger");
+        taco2.getIngredients().addAll(getIngredients().subList(5, 8));
+
+        tacos.add(taco1);
+        tacos.add(taco2);
+        return tacos;
     }
 }

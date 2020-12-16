@@ -25,9 +25,15 @@ public class  Taco {
 
 
     @Size(min=1,message="You must choose at least 1 ingredient")
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Ingredient> ingredients=new ArrayList<>();
 
+    public Taco() {
+    }
+
+    public Taco(@NotNull @Size(min = 5, message = "Name must be at least 5 characters long") String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
